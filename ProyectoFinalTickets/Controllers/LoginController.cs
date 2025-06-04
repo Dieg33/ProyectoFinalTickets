@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TuProyecto.Data;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace ProyectoFinalTickets.Controllers
 {
@@ -33,8 +35,8 @@ namespace ProyectoFinalTickets.Controllers
             contraseña = contraseña?.Trim();
 
             var usuario = await _context.Usuarios
-                .FirstOrDefault(u =>
-                    u.nombre.ToLower() == nombre &&
+                .FirstOrDefaultAsync(u =>
+                    u.contraseña.ToLower() == contraseña &&
                     u.contraseña == contraseña);
 
             if (usuario == null)
@@ -43,22 +45,7 @@ namespace ProyectoFinalTickets.Controllers
                 return View();
             }
 
-            if (!string.IsNullOrEmpty(usuario.rol))
-            {
-                if (usuario.rol.ToLower() == "admi")
-                {
-                    return RedirectToAction("Dashboard", "Admi");
-                }
-                else if (usuario.rol.ToLower() == "pasajero")
-                {
-                    return RedirectToAction("BuscarVuelo", "Usuario");
-                }
-                else
-                {
-                    ViewBag.Error = "Rol desconocido.";
-                    return View();
-                }
-            }
+      
             else
             {
                 ViewBag.Error = "El rol del usuario no está definido.";
