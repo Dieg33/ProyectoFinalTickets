@@ -34,5 +34,7 @@ namespace TuProyecto.Models
 
         // Un Usuario puede tener muchas Notificaciones
         public virtual ICollection<Notificaciones> Notificaciones { get; set; }
+   
     }
 }
+
