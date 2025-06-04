@@ -26,6 +26,8 @@ namespace TuProyecto.Models
         [EmailAddress]
         public string correo { get; set; }
 
+        public string contraseña { get; set; }
+
         // FK DetalleUsuario - Uno a uno
         [ForeignKey(nameof(DetalleUsuario))]
         public int id_detalle { get; set; }
