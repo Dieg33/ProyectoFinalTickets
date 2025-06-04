@@ -34,7 +34,7 @@ namespace ProyectoFinalTickets.Controllers
             nombre = nombre?.Trim().ToLower();
             contraseña = contraseña?.Trim();
 
-            var usuario = await _context.Usuarios
+            var usuario = await _context.Usuario
                 .FirstOrDefaultAsync(u =>
                     u.contraseña.ToLower() == contraseña &&
                     u.contraseña == contraseña);
@@ -45,7 +45,28 @@ namespace ProyectoFinalTickets.Controllers
                 return View();
             }
 
-      
+            if (!string.IsNullOrEmpty(usuario.rol))
+            {
+                if (usuario.rol.ToLower() == "admi")
+                {
+                    return RedirectToAction("Dashboard", "Admi");
+                }
+                else if (usuario.rol.ToLower() == "cliente")
+                {
+                    return RedirectToAction("PrincipalCliente", "Usuario");
+                }
+                else if (usuario.rol.ToLower() == "tecnico")
+                {
+                    return RedirectToAction("GestionTickets", "Tecnico"); 
+                }
+                else
+                {
+                    ViewBag.Error = "Rol desconocido.";
+                    return View();
+                }
+            }
+
+
             else
             {
                 ViewBag.Error = "El rol del usuario no está definido.";
