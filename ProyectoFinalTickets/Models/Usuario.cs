@@ -32,6 +32,8 @@ namespace TuProyecto.Models
         [ForeignKey(nameof(DetalleUsuario))]
         public int id_detalle { get; set; }
 
+        public string rol {  get; set; }
+
         public virtual DetalleUsuario DetalleUsuario { get; set; }
 
         // Un Usuario puede tener muchas Notificaciones

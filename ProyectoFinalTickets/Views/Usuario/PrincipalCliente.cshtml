@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Portal del Cliente";
+}
+
+<div class="container" style="max-width: 600px; margin: auto; font-family: 'Arial', sans-serif;">
+    <div class="card p-4 shadow-lg" style="border-radius: 10px; background: linear-gradient(to right, #005288, #004080); color: white;">
+        <h2 class="text-center" style="border-bottom: 2px solid #ccc; padding-bottom: 10px;">Bienvenido al Portal de Tickets</h2>
+
+        <p class="text-center" style="margin-top: 10px;">Aquí puedes:</p>
+
+        <ul style="list-style: none; padding-left: 0;">
+            <li>✅ Crear nuevos tickets de soporte.</li>
+            <li>📌 Consultar el estado de tus tickets activos.</li>
+            <li>🔔 Ver notificaciones de soporte.</li>
+        </ul>
+
+        <div class="text-center mt-4">
+            <a asp-controller="Ticket" asp-action="CrearTicket" class="btn btn-light btn-lg" style="color: #004080;">📝 Crear Nuevo Ticket</a>
+            <a asp-controller="Ticket" asp-action="MisTickets" class="btn btn-warning btn-lg" style="margin-left: 10px;">📂 Ver Mis Tickets</a>
+        </div>
+
+        <div class="text-center mt-4">
+            <a asp-controller="Usuario" asp-action="Logout" class="btn btn-danger btn-lg">🚪 Cerrar Sesión</a>
+        </div>
+    </div>
+</div>

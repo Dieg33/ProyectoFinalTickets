@@ -14,7 +14,7 @@
 </div>
 
 <div class="container my-5">
-    @using (Html.BeginForm("UsuariosRegistrarse", "Usuario", FormMethod.Post))
+    @using (Html.BeginForm("Login", "Usuario", FormMethod.Post))
     {
         <div class="form-group row mb-4">
             <div class="col-sm-6">
@@ -35,6 +35,11 @@
         <div class="form-group row my-4">
             <label class="text-primary">Correo</label>
             @Html.TextBoxFor(model => model.correo, new { @class = "form-control border-primary", type = "email" })
+        </div>
+
+        <div class="form-group row my-4">
+            <label class="text-primary">Contraseña</label>
+            @Html.PasswordFor(model => model.contraseña, new { @class = "form-control border-primary", placeholder = "Ingrese su contraseña" })
         </div>
 
         <div class="form-group row mt-2 text-center">

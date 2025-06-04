@@ -11,7 +11,7 @@ namespace TuProyecto.Data
         }
 
         public DbSet<DetalleUsuario> DetalleUsuarios { get; set; }
-        public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Usuario> Usuario { get; set; }
         public DbSet<Notificaciones> Notificaciones { get; set; }
         public DbSet<HistorialEstado> HistorialEstados { get; set; }
         public DbSet<Tecnico> Tecnicos { get; set; }
