@@ -12,6 +12,12 @@ namespace ProyectoFinalTickets.Controllers
         {
             _context = context;
         }
+
+        public IActionResult Login()
+        {
+            return View("Login");
+        }
+
         public IActionResult Index()
         {
             return View("Registrarse");
