@@ -15,7 +15,7 @@ namespace ProyectoFinalTickets.Data
         public DbSet<Notificaciones> Notificaciones { get; set; }
         public DbSet<HistorialEstado> HistorialEstados { get; set; }
         public DbSet<Tecnico> Tecnicos { get; set; }
-        public DbSet<Ticket> Tickets { get; set; }
+        public DbSet<Ticket> Ticket { get; set; }
         public DbSet<Adjuntos> Adjuntos { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Comentarios> Comentarios { get; set; }

@@ -1,50 +1,55 @@
 ﻿@model ProyectoFinalTickets.Models.Ticket
 
 @{
-    ViewBag.Title = "Tickets";
+    ViewBag.Title = "Crear Ticket";
 }
 
-<h2>Tickets</h2>
+<h2>Crear Ticket</h2>
 
-@using (Html.BeginForm("Tickets", "Ticket", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@if (ViewBag.Message != null)
 {
-    <div>
-        <div>
-            @Html.LabelFor(m => m.nombre, "Nombre o Empresa")
-            @Html.TextBoxFor(m => m.nombre, new { @class = "form-control" })
-        </div>
-
-        <div>
-            @Html.LabelFor(m => m.correo, "Correo")
-            @Html.TextBoxFor(m => m.correo, new { @type = "email", @class = "form-control" })
-        </div>
-
-        <div>
-            @Html.LabelFor(m => m.asunto, "Asunto")
-            @Html.TextBoxFor(m => m.asunto, new { @class = "form-control" })
-        </div>
-
-        <div>
-            @Html.LabelFor(m => m.descripcion, "Descripcion")
-            @Html.TextAreaFor(m => m.descripcion, new { @class = "form-control", rows = 4 })
-        </div>
-
-        <div>
-            @Html.LabelFor(m => m.prioridad, "Prioridad")
-            @Html.DropDownListFor(m => m.prioridad, new SelectList(ViewBag.Prioridades as List<string>), "Seleccionar", new { @class = "form-control" })
-        </div>
-
-        <div>
-            <label>Archivo Adjunto</label>
-            <input type="file" name="ArchivoAdjunto" class="form-control" />
-        </div>
-
-        <div>
-            @Html.LabelFor(m => m.telefono, "Telefono de contacto")
-            @Html.TextBoxFor(m => m.telefono, new { @class = "form-control", @type = "tel" })
-        </div>
-
-        <br />
-        <button type="submit" class="btn btn-warning">Solicitar</button>
+    <div class="alert alert-success">
+        @ViewBag.Message
     </div>
+}
+
+@using (Html.BeginForm("Principal", "Usuarios", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.nombre, "Nombre o Empresa")
+        @Html.TextBoxFor(m => m.nombre, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.correo, "Correo")
+        @Html.TextBoxFor(m => m.correo, new { @type = "email", @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.asunto, "Asunto")
+        @Html.TextBoxFor(m => m.asunto, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.descripcion, "Descripción")
+        @Html.TextAreaFor(m => m.descripcion, new { @class = "form-control", rows = 4 })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.prioridad, "Prioridad")
+        @Html.DropDownListFor(m => m.prioridad, new SelectList(ViewBag.Prioridades as List<string>), "Seleccionar", new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        <label>Archivo Adjunto</label>
+        <input type="file" name="ArchivoAdjunto" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.telefono, "Teléfono de contacto")
+        @Html.TextBoxFor(m => m.telefono, new { @class = "form-control", @type = "tel" })
+    </div>
+
+    <br />
+    <button type="submit" class="btn btn-warning">Solicitar</button>
 }

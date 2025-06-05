@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProyectoFinalTickets.Models
 {
+    
     public class Ticket
     {
         [Key]

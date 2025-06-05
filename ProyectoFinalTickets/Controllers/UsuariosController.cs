@@ -76,7 +76,6 @@ namespace ProyectoFinalTickets.Controllers
         {
             return View();
         }
-
         [HttpGet]
         public IActionResult Tickets()
         {
@@ -115,8 +114,8 @@ namespace ProyectoFinalTickets.Controllers
                     // Crear objeto adjunto
                     var adjunto = new Adjuntos
                     {
-                      //  nombre_archivo = ArchivoAdjunto.FileName,
-                        //ruta = "/archivos/" + ArchivoAdjunto.FileName, // para visualizar luego
+                        nombre_archivo = ArchivoAdjunto.FileName,
+                        ruta = "/archivos/" + ArchivoAdjunto.FileName // Ruta relativa para visualizar luego
                     };
 
                     // Inicializar lista si está nula
@@ -127,15 +126,21 @@ namespace ProyectoFinalTickets.Controllers
                 }
 
                 // Guardar el ticket
-                _context.Tickets.Add(modelo);
+                _context.Ticket.Add(modelo);
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction("MisTickets");
+                // Usamos ViewBag para enviar el mensaje de éxito
+                ViewBag.Message = "Solicitud enviada correctamente.";
+
+                // No redirigir, solo mantener al usuario en la misma página
+                return View(); // Esto devuelve la misma vista sin redirigir a otra
             }
 
+            // Volver a cargar las prioridades si el modelo no es válido
             ViewBag.Prioridades = new List<string> { "Alta", "Media", "Baja" };
-            return View(modelo);
+            return View(modelo); // Si el formulario no es válido, mostrarlo de nuevo
         }
+
 
         [HttpGet]
         public IActionResult MisTickets()
