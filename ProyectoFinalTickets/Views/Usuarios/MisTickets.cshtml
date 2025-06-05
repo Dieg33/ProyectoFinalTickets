@@ -1,0 +1,46 @@
+﻿@model List<ProyectoFinalTickets.Models.Ticket>
+
+@{
+    ViewData["Title"] = "Historial de Tickets";
+}
+
+<div class="container mt-5">
+    <h3 class="fw-bold mb-4">Mis Tickets</h3>
+
+    <table class="table table-bordered text-center">
+        <thead class="table-light">
+            <tr>
+                <th>ID</th>
+                <th>Asunto</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var ticket in Model)
+                {
+                    <tr>
+                        <td>@ticket.id_ticket</td>
+                        <td>@ticket.asunto</td>
+                        <td>@ticket.fecha_creacion.ToString("dd/MM/yyyy")</td>
+                        <td>@ticket.estado</td>
+                        <td>
+                            <a asp-controller="Tickets" asp-action="Detalles" asp-route-id="@ticket.id_ticket" class="btn btn-sm btn-primary">
+                                Ver
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="5">No hay tickets registrados</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
