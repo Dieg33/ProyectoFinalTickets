@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using TuProyecto.Data;
-using TuProyecto.Models;
+using ProyectoFinalTickets.Data;
+using ProyectoFinalTickets.Models;
 
 namespace ProyectoFinalTickets.Controllers
 {

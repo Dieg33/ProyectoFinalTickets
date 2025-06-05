@@ -1,18 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TuProyecto.Data;
 using Microsoft.EntityFrameworkCore;
-
+using ProyectoFinalTickets.Data;
 
 namespace ProyectoFinalTickets.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly ApplicationDbContext _context;
-
-        public LoginController (ApplicationDbContext context)
+        private readonly ApplicationDbContext _Context;
+        public LoginController(ApplicationDbContext context)
         {
-
-            _context = context;
+            _Context = context;
         }
 
         [HttpGet]
@@ -21,30 +18,34 @@ namespace ProyectoFinalTickets.Controllers
             return View();
         }
 
-
         [HttpPost]
-        public async Task<ActionResult> Index(string nombre, string  contraseña)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Index(string nombre, string contraseña)
         {
             if (string.IsNullOrEmpty(nombre) || string.IsNullOrEmpty(contraseña))
             {
-                ViewBag.Error = "Debe ingresar correo y contraseña.";
+                ViewBag.Error = "Debe ingresar nombre y contraseña.";
                 return View();
             }
 
-            nombre = nombre?.Trim().ToLower();
-            contraseña = contraseña?.Trim();
+            nombre = nombre.Trim().ToLower();
+            contraseña = contraseña.Trim();
 
-            var usuario = await _context.Usuario
-                .FirstOrDefaultAsync(u =>
-                    u.contraseña.ToLower() == contraseña &&
-                    u.contraseña == contraseña);
+            var usuario = await _Context.Usuario
+                .FirstOrDefaultAsync(u => u.nombre.ToLower() == nombre);
 
             if (usuario == null)
             {
-                ViewBag.Error = "Usuario o contraseña incorrectos.";
+                ViewBag.Error = "Nombre o contraseña incorrectos.";
                 return View();
             }
 
+
+            // Guardar datos en sesión
+            HttpContext.Session.SetString("UserNombre", usuario.nombre);
+            HttpContext.Session.SetString("UserRole", usuario.rol);
+
+            // Redirigir según el rol
             if (!string.IsNullOrEmpty(usuario.rol))
             {
                 if (usuario.rol.ToLower() == "admi")
@@ -53,11 +54,7 @@ namespace ProyectoFinalTickets.Controllers
                 }
                 else if (usuario.rol.ToLower() == "cliente")
                 {
-                    return RedirectToAction("PrincipalCliente", "Usuario");
-                }
-                else if (usuario.rol.ToLower() == "tecnico")
-                {
-                    return RedirectToAction("GestionTickets", "Tecnico"); 
+                    return RedirectToAction("Principal", "Usuarios");
                 }
                 else
                 {
@@ -65,21 +62,11 @@ namespace ProyectoFinalTickets.Controllers
                     return View();
                 }
             }
-
-
             else
             {
                 ViewBag.Error = "El rol del usuario no está definido.";
                 return View();
             }
-
-
-        }
-        // Cerrar sesión
-        public IActionResult Logout()
-        {
-            HttpContext.Session.Clear();
-            return RedirectToAction("Index");
         }
     }
 }

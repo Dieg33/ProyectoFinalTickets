@@ -2,8 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TuProyecto.Models
+namespace ProyectoFinalTickets.Models
 {
+    [Table("Usuario")]
     public class Usuario
     {
         [Key]
@@ -28,12 +29,14 @@ namespace TuProyecto.Models
 
         public string contraseña { get; set; }
 
+        public string rol { get; set; }
+
+
         // FK DetalleUsuario - Uno a uno
         [ForeignKey(nameof(DetalleUsuario))]
-        public int id_detalle { get; set; }
+        public int? id_detalle { get; set; }
 
-        public string rol {  get; set; }
-
+     
         public virtual DetalleUsuario DetalleUsuario { get; set; }
 
         // Un Usuario puede tener muchas Notificaciones

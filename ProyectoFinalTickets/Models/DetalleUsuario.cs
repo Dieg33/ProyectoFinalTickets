@@ -1,10 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace TuProyecto.Models
+namespace ProyectoFinalTickets.Models
 {
     public class DetalleUsuario
     {
+        
+
         [Key]
         public int id_detalle { get; set; }
 

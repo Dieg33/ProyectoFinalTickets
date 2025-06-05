@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TuProyecto.Models
+namespace ProyectoFinalTickets.Models
 {
     public class Tecnico
     {

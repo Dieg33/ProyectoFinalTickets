@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace TuProyecto.Models
+namespace ProyectoFinalTickets.Models
 {
     public class Categoria
     {

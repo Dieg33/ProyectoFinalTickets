@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TuProyecto.Models;
+using ProyectoFinalTickets.Models;
 
-namespace TuProyecto.Data
+namespace ProyectoFinalTickets.Data
 {
     public class ApplicationDbContext : DbContext
     {
@@ -19,6 +19,7 @@ namespace TuProyecto.Data
         public DbSet<Adjuntos> Adjuntos { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Comentarios> Comentarios { get; set; }
+        public object DetalleUsuario { get; internal set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
