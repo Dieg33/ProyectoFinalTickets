@@ -56,6 +56,10 @@ namespace ProyectoFinalTickets.Controllers
                 {
                     return RedirectToAction("Principal", "Usuarios");
                 }
+                else if (usuario.rol.ToLower() == "tecnico")
+                {
+                    return RedirectToAction("portada", "Tecnicos");
+                }
                 else
                 {
                     ViewBag.Error = "Rol desconocido.";
