@@ -32,6 +32,11 @@ namespace ProyectoFinalTickets.Models
         [StringLength(50)]
         public string estado { get; set; }
 
+        public string nombre { get; set; }
+        public string correo { get; set; }
+        public int telefono { get; set; }
+
+
         // FK a Tecnico (Opcional? Según diagrama)
         [ForeignKey(nameof(Tecnico))]
         public int? id_tecnico { get; set; }
