@@ -1,13 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using ProyectoFinalTickets.Services;
-using TuProyecto.Data;
+using ProyectoFinalTickets.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 // Agregar servicios al contenedor.
 builder.Services.AddControllersWithViews();
+builder.Services.AddSession();
 
 builder.Services.AddScoped<CorreoService>();
 
@@ -34,6 +35,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseSession();
 
 app.UseAuthorization();
 
