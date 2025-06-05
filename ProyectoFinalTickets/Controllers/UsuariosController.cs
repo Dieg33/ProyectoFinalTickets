@@ -77,11 +77,79 @@ namespace ProyectoFinalTickets.Controllers
             return View();
         }
 
-
+        [HttpGet]
         public IActionResult Tickets()
         {
+            // Llenar el combo de prioridades
+            ViewBag.Prioridades = new List<string> { "Alta", "Media", "Baja" };
             return View();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Tickets(Ticket modelo, IFormFile ArchivoAdjunto)
+        {
+            if (ModelState.IsValid)
+            {
+                // Asignar la fecha de creación
+                modelo.fecha_creacion = DateTime.Now;
+
+                // Asignar estado inicial por defecto
+                modelo.estado = "Abierto";
+
+                // Procesar el archivo adjunto (si lo hay)
+                if (ArchivoAdjunto != null && ArchivoAdjunto.Length > 0)
+                {
+                    // Ruta donde guardar (debes definir esta variable o usar wwwroot/archivos, por ejemplo)
+                    var carpetaArchivos = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "archivos");
+                    if (!Directory.Exists(carpetaArchivos))
+                        Directory.CreateDirectory(carpetaArchivos);
+
+                    var rutaArchivo = Path.Combine(carpetaArchivos, ArchivoAdjunto.FileName);
+
+                    // Guardar el archivo
+                    using (var stream = new FileStream(rutaArchivo, FileMode.Create))
+                    {
+                        await ArchivoAdjunto.CopyToAsync(stream);
+                    }
+
+                    // Crear objeto adjunto
+                    var adjunto = new Adjuntos
+                    {
+                      //  nombre_archivo = ArchivoAdjunto.FileName,
+                        //ruta = "/archivos/" + ArchivoAdjunto.FileName, // para visualizar luego
+                    };
+
+                    // Inicializar lista si está nula
+                    if (modelo.Adjuntos == null)
+                        modelo.Adjuntos = new List<Adjuntos>();
+
+                    modelo.Adjuntos.Add(adjunto);
+                }
+
+                // Guardar el ticket
+                _context.Tickets.Add(modelo);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("MisTickets");
+            }
+
+            ViewBag.Prioridades = new List<string> { "Alta", "Media", "Baja" };
+            return View(modelo);
+        }
+
+        [HttpGet]
+        public IActionResult MisTickets()
+        {
+            var tickets = new List<Ticket>
+    {
+        new Ticket { id_ticket = 1, asunto = "Prueba", fecha_creacion = DateTime.Now, estado = "Abierto", correo = "correo@ejemplo.com" }
+    };
+
+            return View(tickets);
+        }
+
+
+
 
     }
 }
