@@ -1,31 +1,136 @@
 ﻿@{
-    ViewBag.Title = "Iniciar Sesión";
+    ViewData["Title"] = "Iniciar Sesión";
 }
 
-<div class="container">
-    <h2 class="text-center text-primary my-5">Inicio de Sesión</h2>
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
 
-    <div class="card p-4 shadow">
-        @using (Html.BeginForm("PrincipalCliente", "Usuario", FormMethod.Post))
-        {
-            <div class="form-group mb-3">
-                <label class="text-primary">Nombre</label>
-                @Html.TextBox("nombre", "", new { @class = "form-control", placeholder = "Ingrese su nombre" })
-            </div>
+<style>
+    body, html {
+        height: 100%;
+        background: #c9e9f9;
+    }
 
-            <div class="form-group mb-3">
-                <label class="text-primary">Contraseña</label>
-                @Html.Password("password", "", new { @class = "form-control", placeholder = "Ingrese su contraseña" })
-            </div>
+    .login-container {
+        min-height: 80vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 15px;
+    }
 
-            <div class="form-group text-center mt-4">
-                <input type="submit" class="btn btn-primary w-50" value="Iniciar Sesión" />
-            </div>
+    .login-card {
+        background: white;
+        border-radius: 20px;
+        padding: 30px 25px;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+        max-width: 420px;
+        width: 100%;
+    }
+
+        .login-card h3 {
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #0d6efd;
         }
 
-        <div class="text-center mt-3">
-            <p>¿No tienes cuenta?</p>
-            <a asp-controller="Usuario" asp-action="Registrarse" class="btn btn-outline-primary">Registrarse</a>
-        </div>
+    .form-label {
+        font-weight: 600;
+        font-size: 1rem;
+    }
+
+    .input-group-text {
+        background: #0d6efd;
+        color: white;
+        border-radius: 12px 0 0 12px;
+        border: none;
+        font-size: 1.2rem;
+    }
+
+    .form-control {
+        border-radius: 0 12px 12px 0;
+        border: 1px solid #ced4da;
+        font-size: 1rem;
+        padding: 10px 12px;
+    }
+
+        .form-control:focus {
+            border-color: #0d6efd;
+            box-shadow: 0 0 6px rgba(13,110,253,0.5);
+            outline: none;
+        }
+
+    .btn-primary {
+        border-radius: 15px;
+        font-weight: 700;
+        padding: 12px 0;
+        box-shadow: 0 4px 12px rgba(13,110,253,0.4);
+        font-size: 1.1rem;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-primary:hover {
+            background-color: #0b5ed7;
+        }
+
+    .register-text {
+        font-size: 0.95rem;
+        color: #444;
+        margin-top: 15px;
+    }
+
+        .register-text a {
+            color: #0d6efd;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+            .register-text a:hover {
+                text-decoration: underline;
+            }
+
+    .alert {
+        border-radius: 15px;
+        margin-top: 20px;
+    }
+</style>
+
+<div class="login-container">
+    <div class="login-card">
+        <h3>Iniciar Sesión</h3>
+
+        <form method="post">
+            <div class="mb-4">
+                <label for="nombre" class="form-label">Nombre de usuario</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-person"></i></span>
+                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Tu nombre" required />
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label for="contraseña" class="form-label">Contraseña</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                    <input type="password" class="form-control" id="contraseña" name="contraseña" placeholder="Tu contraseña" required />
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Ingresar</button>
+
+
+            <div class="register-text text-center">
+                ¿No tienes una cuenta? <a href="/Usuarios/Registro">Regístrate aquí</a>
+            </div>
+        </form>
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger" role="alert">
+                @ViewBag.Error
+            </div>
+        }
     </div>
 </div>

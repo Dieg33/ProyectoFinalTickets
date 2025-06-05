@@ -1,0 +1,47 @@
+﻿@model ProyectoFinalTickets.Models.Usuario
+
+@{
+    ViewData["Title"] = "Registro";
+}
+
+<h2 class="text-center my-4">Registro de Usuario</h2>
+
+<div class="container" style="max-width: 500px;">
+    <form asp-action="Registro" method="post" class="shadow p-4 rounded bg-light">
+        <div class="mb-3">
+            <label asp-for="nombre" class="form-label fw-bold">Nombre</label>
+            <input asp-for="nombre" class="form-control" placeholder="Ingresa tu nombre" />
+            <span asp-validation-for="nombre" class="text-danger small"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="apellidos" class="form-label fw-bold">Apellido</label>
+            <input asp-for="apellidos" class="form-control" placeholder="Ingresa tu apellido" />
+            <span asp-validation-for="apellidos" class="text-danger small"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="empresa" class="form-label fw-bold">Empresa</label>
+            <input asp-for="empresa" class="form-control" placeholder="Empresa" />
+            <span asp-validation-for="empresa" class="text-danger small"></span>
+        </div>
+        
+
+        <div class="mb-3">
+            <label asp-for="correo" class="form-label fw-bold">Correo Electrónico</label>
+            <input asp-for="correo" type="email" class="form-control" placeholder="ejemplo@correo.com" />
+            <span asp-validation-for="correo" class="text-danger small"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="contraseña" class="form-label fw-bold">Contraseña</label>
+            <input asp-for="contraseña" type="password" class="form-control" placeholder="********" />
+            <span asp-validation-for="contraseña" class="text-danger small"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100 mt-3">Registrarse</button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

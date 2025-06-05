@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Bienvenido al Portal del Cliente";
+}
+
+<div class="container">
+    <h2 class="text-center text-primary my-5">Portal del Cliente</h2>
+
+    <div class="card p-4 shadow">
+        <p class="text-center">Bienvenido a la plataforma de gestión de tickets. Aquí puedes:</p>
+
+        <ul>
+            <li>Reportar problemas y crear nuevos tickets.</li>
+            <li>Consultar el estado de tus tickets activos.</li>
+            <li>Ver notificaciones y actualizaciones de soporte.</li>
+        </ul>
+
+        <div class="text-center mt-4">
+            <a asp-controller="Ticket" asp-action="CrearTicket" class="btn btn-primary">Crear un Nuevo Ticket</a>
+            <a asp-controller="Ticket" asp-action="MisTickets" class="btn btn-secondary">Mis Tickets</a>
+        </div>
+
+        <div class="text-center mt-3">
+            <a asp-controller="Usuario" asp-action="Logout" class="btn btn-danger">Cerrar Sesión</a>
+        </div>
+    </div>
+</div>
